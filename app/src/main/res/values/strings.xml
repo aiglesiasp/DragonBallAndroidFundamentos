@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DragonBallAndroidFundamentos</string>
+    <string name="title">DragonBall</string>
+    <string name="insert_you_name">Insert you name</string>
+    <string name="insert_your_password">Insert your password</string>
+    <string name="login">LOGIN</string>
 </resources>

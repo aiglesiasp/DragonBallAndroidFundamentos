@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.w(MainActivity::javaClass.name, "onCreate STARTING...")
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.login_constraint)
 
         //println("hola")
         //Misma manera de hacer un LOG
