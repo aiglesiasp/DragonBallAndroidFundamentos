@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DragonBallAndroidFundamentos</string>
     <string name="login">LOGIN</string>
     <string name="insert_your_password">Insert your password</string>
     <string name="title">DragonBall</string>
     <string name="insert_you_name">Insert your name</string>
+    <string name="recordar_usuario">Remember User</string>
 </resources>

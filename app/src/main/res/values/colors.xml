@@ -12,6 +12,7 @@
     //Mi paleta de colores
     <color name="dark_blue">#FF182E8C</color>
     <color name="blue">#FF3B59D9</color>
+    <color name="blue_semitransparent">#4D3B59D9</color>
     <color name="orange">#FFDB5930</color>
     <color name="green">#FF7DD925</color>
     <color name="dark_green">#FF548C1F</color>
