@@ -55,12 +55,14 @@ class LoginMainActivityViewModel: ViewModel() {
         })
     }
 
+    //Funcion para mandar al hilo principal
     fun setValueOnMainThread(value: LoginState) {
         viewModelScope.launch(Dispatchers.Main) {
             stateLiveData.value = value
         }
     }
 
+    //Control de estados
     sealed class LoginState {
         data class Success(val token: String): LoginState()
         data class Error(val error: String): LoginState()
