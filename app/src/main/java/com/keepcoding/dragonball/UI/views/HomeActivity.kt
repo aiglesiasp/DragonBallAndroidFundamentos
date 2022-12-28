@@ -2,14 +2,14 @@ package com.keepcoding.dragonball
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.keepcoding.dragonball.databinding.ActivityHeroesListBinding
+import com.keepcoding.dragonball.databinding.ActivityHomeBinding
 
-class HeroesListActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityHeroesListBinding
+class HomeActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHeroesListBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }

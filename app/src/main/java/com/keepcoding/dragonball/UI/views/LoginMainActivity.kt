@@ -1,10 +1,8 @@
 package com.keepcoding.dragonball
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -52,7 +50,7 @@ class LoginMainActivity : AppCompatActivity() {
             when(it) {
                 is LoginMainActivityViewModel.LoginState.Success -> {
                     binding.progressBarLogin?.visibility = View.INVISIBLE
-                    val intent = Intent(this@LoginMainActivity, HeroesListActivity::class.java)
+                    val intent = Intent(this@LoginMainActivity, HomeActivity::class.java)
                     intent.putExtra("token", viewModel.token)
                     startActivity(intent)
                 }

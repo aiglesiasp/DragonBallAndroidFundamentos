@@ -16,7 +16,7 @@
         android:theme="@style/Theme.DragonBallAndroidFundamentos"
         tools:targetApi="31">
         <activity
-            android:name=".HeroesListActivity"
+            android:name=".HomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
