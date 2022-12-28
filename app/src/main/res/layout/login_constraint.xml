@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondo2"
-    tools:context=".MainActivity">
+    tools:context=".LoginMainActivity">
 
     <!-- TITULO APLICACION -->
     <TextView
@@ -78,7 +78,7 @@
         android:backgroundTint="@color/blue"
         app:layout_constraintEnd_toEndOf="@+id/card_view_login"
         app:layout_constraintStart_toStartOf="@+id/card_view_login"
-        app:layout_constraintTop_toBottomOf="@+id/card_view_login" >
+        app:layout_constraintTop_toBottomOf="@+id/card_view_login">
     </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
