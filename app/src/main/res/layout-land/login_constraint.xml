@@ -4,55 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/fondo2"
     tools:context=".MainActivity">
 
     <!-- TITULO APLICACION -->
     <TextView
+        style="@style/Theme.DragonBallAndroidFundamentos.TextViewTitle"
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/margin_big"/>
+        android:layout_width ="match_parent"
+        android:layout_height ="wrap_content"
+        />
 
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_medium"
-        android:ems="10"
-        android:hint="@string/insert_you_name"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.cardview.widget.CardView
+        style="@style/Theme.DragonBallAndroidFundamentos.CardView"
+        android:id="@+id/card_view_login"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/loginButton"
+        app:layout_constraintStart_toStartOf= "parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        app:layout_constraintEnd_toStartOf="@id/loginButton"
-        android:layout_marginTop="@dimen/margin_big"/>
-
-    <EditText
-        android:id="@+id/editPassword"
-        android:layout_width="0dp"
+        android:layout_width= "wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_medium"
-        android:ems="10"
-        android:hint="@string/insert_your_password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editName"
-        app:layout_constraintEnd_toStartOf="@id/loginButton"
-        android:layout_marginTop="@dimen/margin_medium"/>
+        android:layout_marginVertical="@dimen/margin_small"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/margin_small"
+            >
+            <EditText
+                style="@style/Theme.DragonBallAndroidFundamentos.EditText"
+                android:id="@+id/editName"
+                android:hint="@string/insert_you_name"
+                android:inputType="textPersonName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
 
-    <Button
-        android:id="@+id/loginButton"
+            <EditText
+                style="@style/Theme.DragonBallAndroidFundamentos.EditText"
+                android:id="@+id/editPassword"
+                android:hint="@string/insert_your_password"
+                android:inputType="textPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                />
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recordar_usuario"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginButton"
         android:layout_marginHorizontal="@dimen/margin_medium"
-        android:text="@string/login"
-        app:layout_constraintBottom_toBottomOf="@+id/editPassword"
+        android:layout_marginVertical="@dimen/margin_medium"
+        android:textColor="@color/black"
+        android:text = "@string/login"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:backgroundTint="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/card_view_login"
+        app:layout_constraintStart_toEndOf="@+id/card_view_login"
+        >
+    </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

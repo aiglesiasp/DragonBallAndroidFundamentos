@@ -15,7 +15,7 @@
     </style>
 
     <style name="Theme.DragonBallAndroidFundamentos.EditText" parent="Theme.DragonBallAndroidFundamentos">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:layout_marginHorizontal">@dimen/margin_medium</item>
         <item name="android:layout_marginVertical">@dimen/margin_small</item>
         <item name="android:ems">10</item>
@@ -25,13 +25,13 @@
 
 
     <style name="Theme.DragonBallAndroidFundamentos.TextViewTitle" parent="Theme.DragonBallAndroidFundamentos">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:layout_marginHorizontal">@dimen/margin_small</item>
         <item name="android:layout_marginVertical">@dimen/margin_big</item>
         <item name="android:padding">@dimen/margin_small</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/black</item>
-        <item name="android:fontFamily">@font/begok</item>
+        <item name="android:fontFamily">@font/asterix</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -39,8 +39,8 @@
     <style name="Theme.DragonBallAndroidFundamentos.CardView" parent="Theme.DragonBallAndroidFundamentos">
         <item name="android:layout_marginHorizontal">@dimen/margin_small</item>
         <item name="android:layout_marginVertical">@dimen/super_margin_top</item>
-
-        <item name="android:backgroundTint">@color/blue_semitransparent</item>
+        <item name="cardCornerRadius">30dp</item>
+        <item name="android:backgroundTint">#803B59D9</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>
