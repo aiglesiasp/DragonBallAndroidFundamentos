@@ -1,9 +1,11 @@
 package com.keepcoding.dragonball
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.keepcoding.dragonball.databinding.LoginConstraintBinding
 
@@ -29,6 +31,7 @@ class LoginMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LoginConstraintBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setObservers()
         setListeners()
     }
 
@@ -44,7 +47,23 @@ class LoginMainActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
+        viewModel.stateLiveData.observe(this) {
+            when(it) {
+                is LoginMainActivityViewModel.LoginState.Success -> {
+                    val intent = Intent(this@LoginMainActivity, HeroesListActivity::class.java)
+                    intent.putExtra("token", viewModel.token)
+                    startActivity(intent)
+                }
 
+                is LoginMainActivityViewModel.LoginState.Error -> {
+                    Toast.makeText(this, "Error al cargar: ${it.error}", Toast.LENGTH_LONG).show()
+                }
+
+                is LoginMainActivityViewModel.LoginState.Loading -> {
+                    Toast.makeText(this, "CARGANDO...", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 }
 
