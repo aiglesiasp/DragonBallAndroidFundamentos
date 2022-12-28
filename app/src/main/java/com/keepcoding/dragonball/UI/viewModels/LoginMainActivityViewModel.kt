@@ -35,13 +35,11 @@ class LoginMainActivityViewModel: ViewModel() {
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("Error", "Error getting token: ${e.message}")
-                println("Error en el login")
                 setValueOnMainThread(LoginState.Error(e.message.toString()))
             }
             override fun onResponse(call: Call, response: Response) {
                 if(response.code != 200) {
                     Log.e("Error", "Error getting token: ${response.code}")
-                    println("Error en el login del tipo ${response.code}")
                     setValueOnMainThread(LoginState.Error("${response.code}"))
                     return
                 }
