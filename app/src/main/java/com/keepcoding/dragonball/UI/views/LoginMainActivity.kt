@@ -51,19 +51,19 @@ class LoginMainActivity : AppCompatActivity() {
         viewModel.stateLiveData.observe(this) {
             when(it) {
                 is LoginMainActivityViewModel.LoginState.Success -> {
-                    binding.progressBar?.visibility = View.INVISIBLE
+                    binding.progressBarLogin?.visibility = View.INVISIBLE
                     val intent = Intent(this@LoginMainActivity, HeroesListActivity::class.java)
                     intent.putExtra("token", viewModel.token)
                     startActivity(intent)
                 }
 
                 is LoginMainActivityViewModel.LoginState.Error -> {
-                    binding.progressBar?.visibility = View.INVISIBLE
+                    binding.progressBarLogin?.visibility = View.INVISIBLE
                     Toast.makeText(this, "Error al cargar: ${it.error}", Toast.LENGTH_LONG).show()
                 }
 
                 is LoginMainActivityViewModel.LoginState.Loading -> {
-                    binding.progressBar?.visibility = View.VISIBLE
+                    binding.progressBarLogin?.visibility = View.VISIBLE
                 }
                 else -> {
                     Toast.makeText(this, "NO HA ENTRADO EN NINGUNA DE LAS OPCIONES", Toast.LENGTH_LONG).show()

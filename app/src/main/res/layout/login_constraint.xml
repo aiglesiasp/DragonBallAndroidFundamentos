@@ -71,18 +71,18 @@
         android:id="@+id/loginButton"
         android:layout_marginHorizontal="@dimen/margin_medium"
         android:layout_marginVertical="@dimen/margin_medium"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text = "@string/login"
         android:textAlignment="center"
         android:textSize="25sp"
-        android:backgroundTint="@color/blue"
+        android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/card_view_login"
         app:layout_constraintStart_toStartOf="@+id/card_view_login"
         app:layout_constraintTop_toBottomOf="@+id/card_view_login">
     </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarLogin"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
