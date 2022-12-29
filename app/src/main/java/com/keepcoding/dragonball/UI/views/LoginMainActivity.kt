@@ -35,6 +35,7 @@ class LoginMainActivity : AppCompatActivity() {
     }
 
 
+    //ESCUCHADORES
     private fun setListeners() {
         with(binding) {
             loginButton.setOnClickListener {
@@ -45,14 +46,13 @@ class LoginMainActivity : AppCompatActivity() {
         }
     }
 
+    //OBSERVADORES
     private fun setObservers() {
-        viewModel.stateLiveData.observe(this) {
+        viewModel.stateLiveDataLogin.observe(this) {
             when(it) {
                 is LoginMainActivityViewModel.LoginState.Success -> {
                     binding.progressBarLogin?.visibility = View.INVISIBLE
-                    val intent = Intent(this@LoginMainActivity, HomeActivity::class.java)
-                    intent.putExtra("token", viewModel.token)
-                    startActivity(intent)
+                    HomeActivity.launch(this, viewModel.token)
                 }
 
                 is LoginMainActivityViewModel.LoginState.Error -> {

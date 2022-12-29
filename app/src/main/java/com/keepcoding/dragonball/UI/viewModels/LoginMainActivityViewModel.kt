@@ -14,7 +14,7 @@ import java.util.Base64
 
 class LoginMainActivityViewModel: ViewModel() {
 
-    val stateLiveData : MutableLiveData<LoginState> by lazy { MutableLiveData<LoginState>() }
+    val stateLiveDataLogin : MutableLiveData<LoginState> by lazy { MutableLiveData<LoginState>() }
     var token: String = ""
 
     fun login (user: String, password: String) {
@@ -56,7 +56,7 @@ class LoginMainActivityViewModel: ViewModel() {
     //Funcion para mandar al hilo principal
     fun setValueOnMainThread(value: LoginState) {
         viewModelScope.launch(Dispatchers.Main) {
-            stateLiveData.value = value
+            stateLiveDataLogin.value = value
         }
     }
 

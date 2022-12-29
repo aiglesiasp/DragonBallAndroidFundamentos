@@ -40,7 +40,7 @@
         <item name="android:layout_marginHorizontal">@dimen/margin_small</item>
         <item name="android:layout_marginVertical">@dimen/super_margin_top</item>
         <item name="cardCornerRadius">30dp</item>
-        <item name="android:backgroundTint">#803B59D9</item>
+        <item name="android:backgroundTint">#BFFFFFFF</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>
