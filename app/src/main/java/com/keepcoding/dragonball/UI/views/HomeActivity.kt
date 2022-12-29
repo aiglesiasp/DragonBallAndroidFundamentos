@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.keepcoding.dragonball.UI.viewModels.HomeActivityViewModel
+import com.keepcoding.dragonball.UI.views.battleFragment.BattleFragment
+import com.keepcoding.dragonball.UI.views.heroesListFragment.HeroesListFragment
 import com.keepcoding.dragonball.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -31,11 +33,14 @@ class HomeActivity : AppCompatActivity() {
 
         //Obtener el token que me pasan del otro activity
         if(savedInstanceState == null) {
+            //OBTENER TOKEN
             intent.getStringExtra(TAG_TOKEN)?.let {
                 viewModel.token = it
             }
+            //NAVEGAR AL FRAGMENT
+            supportFragmentManager.beginTransaction()
+                .replace(binding.contenedor.id, BattleFragment.newInstance())
+                .commitNow()
         }
-
-        //TODO: Navegar al fragment que toque
     }
 }
