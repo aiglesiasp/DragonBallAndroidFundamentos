@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import com.keepcoding.dragonball.UI.viewModels.HomeActivityViewModel
 import com.keepcoding.dragonball.UI.views.battleFragment.BattleFragment
 import com.keepcoding.dragonball.UI.views.heroesListFragment.HeroesListFragment
@@ -38,9 +39,30 @@ class HomeActivity : AppCompatActivity() {
                 viewModel.token = it
             }
             //NAVEGAR AL FRAGMENT
+            val fragment = HeroesListFragment()
             supportFragmentManager.beginTransaction()
-                .replace(binding.contenedor.id, BattleFragment.newInstance())
+                .replace(binding.contenedor.id, fragment)
                 .commitNow()
+        }
+
+        //ESCUCHAS DE BOTON
+        setListeners()
+
+        //OBSERVADORES
+
+
+    }
+
+    //ESCUCHADORES
+    private fun setListeners() {
+        with(binding) {
+            botonHome.setOnClickListener {
+                //NAVEGAR AL FRAGMENT
+                val fragment = BattleFragment()
+                supportFragmentManager.beginTransaction()
+                    .replace(binding.contenedor.id, fragment)
+                    .commitNow()
+            }
         }
     }
 }

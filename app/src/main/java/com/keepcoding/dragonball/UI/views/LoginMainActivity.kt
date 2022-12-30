@@ -34,14 +34,19 @@ class LoginMainActivity : AppCompatActivity() {
         setListeners()
     }
 
+    //LLAMAR AL LOGIN DEL VIEWMODEL
+    private fun login() {
+        val user = binding.editName.text.toString()
+        val pass = binding.editPassword.text.toString()
+        viewModel.login(user,pass)
+    }
+
 
     //ESCUCHADORES
     private fun setListeners() {
         with(binding) {
             loginButton.setOnClickListener {
-                val user = binding.editName.text.toString()
-                val pass = binding.editPassword.text.toString()
-                viewModel.login(user, pass)
+                login()
             }
         }
     }

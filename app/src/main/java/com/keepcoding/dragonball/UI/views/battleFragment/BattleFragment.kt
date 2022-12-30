@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.keepcoding.dragonball.R
 import com.keepcoding.dragonball.UI.viewModels.HomeActivityViewModel
@@ -14,11 +15,7 @@ import com.keepcoding.dragonball.databinding.FragmentHeroesListBinding
 
 class BattleFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = BattleFragment()
-    }
-
-    private val viewModel: HomeActivityViewModel by viewModels()
+    private val viewModel: HomeActivityViewModel by activityViewModels()
     private lateinit var binding: FragmentBattleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

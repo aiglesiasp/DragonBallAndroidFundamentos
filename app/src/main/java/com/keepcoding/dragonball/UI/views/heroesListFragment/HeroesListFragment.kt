@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.keepcoding.dragonball.HomeActivity
 import com.keepcoding.dragonball.R
 import com.keepcoding.dragonball.UI.viewModels.HomeActivityViewModel
 import com.keepcoding.dragonball.databinding.FragmentHeroesListBinding
@@ -16,7 +19,7 @@ class HeroesListFragment : Fragment() {
         fun newInstance() = HeroesListFragment()
     }
 
-    private val viewModel: HomeActivityViewModel by viewModels()
+    private val viewModel: HomeActivityViewModel by activityViewModels()
     private lateinit var binding : FragmentHeroesListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,5 +36,11 @@ class HeroesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //TODO: Desarrollar codigo
+        createRecycler()
+    }
+
+    private fun createRecycler() {
+        binding.recyclerView.adapter = HeroesAdapter()
+        binding.recyclerView.layoutManager = LinearLayoutManager(HomeActivity())
     }
 }

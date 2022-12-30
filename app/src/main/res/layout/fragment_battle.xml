@@ -11,7 +11,7 @@
         android:id="@+id/nombreJugador1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
+        android:text= "JUGADOR 1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -24,13 +24,14 @@
         app:layout_constraintTop_toBottomOf="@id/nombreJugador1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/dark_green"
         />
 
     <TextView
         android:id="@+id/nombreJugador2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
+        android:text= "JUGADOR 2"
         app:layout_constraintTop_toBottomOf="@id/imagenJugador1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
