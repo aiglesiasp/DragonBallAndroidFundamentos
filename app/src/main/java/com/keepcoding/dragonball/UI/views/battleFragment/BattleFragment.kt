@@ -33,7 +33,11 @@ class BattleFragment : Fragment() {
         binding = FragmentBattleBinding.inflate(inflater)
 
         //CREO FUNCION ESCUCHA BOTON PARA LA LUCHA
-        //TODO:
+        //BOTON DE LUCHAR
+        binding.buttonFight.setOnClickListener {
+            viewModel.fight()
+            reloadLifeProgressBar()
+        }
 
         //OBTENER HEROES
         val hero1 = viewModel.listHeroesFighting[0]
@@ -67,5 +71,10 @@ class BattleFragment : Fragment() {
         val activity = activity as HomeActivity
         activity.supportFragmentManager
             .popBackStack()
+    }
+
+    private fun reloadLifeProgressBar() {
+        binding.progressBar1.progress = viewModel.listHeroesFighting[0].currentLive
+        binding.progressBar2.progress = viewModel.listHeroesFighting[1].currentLive
     }
 }

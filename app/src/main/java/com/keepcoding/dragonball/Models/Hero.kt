@@ -5,5 +5,5 @@ data class Hero (
     val name: String,
     val photo: String,
     val maxLive: Int = 100,
-    val currentLive: Int = 100
+    var currentLive: Int = 100
         )

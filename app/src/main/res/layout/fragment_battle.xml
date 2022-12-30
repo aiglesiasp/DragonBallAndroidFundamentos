@@ -4,55 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.views.battleFragment.BattleFragment"
-    android:background="@color/teal_200">
+    tools:context=".UI.views.battleFragment.BattleFragment">
+
 
     <TextView
         android:id="@+id/nombreJugador1"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text= "JUGADOR 1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/imagenJugador1"
+        app:layout_constraintStart_toEndOf="@id/imagenJugador1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/margin_small"/>
 
     <ImageView
         android:id="@+id/imagenJugador1"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@color/purple_200"
-        app:layout_constraintTop_toBottomOf="@id/nombreJugador1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/dark_green"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:layout_marginVertical="@dimen/super_margin_top"
         />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/imagenJugador1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nombreJugador1"
+        android:layout_marginHorizontal="@dimen/margin_small"/>
+
 
     <TextView
         android:id="@+id/nombreJugador2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text= "JUGADOR 2"
-        app:layout_constraintTop_toBottomOf="@id/imagenJugador1"
+        app:layout_constraintTop_toTopOf="@id/imagenJugador2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/imagenJugador2"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:gravity="end"/>
 
     <ImageView
         android:id="@+id/imagenJugador2"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@color/purple_200"
-        app:layout_constraintTop_toBottomOf="@id/nombreJugador2"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagenJugador1"
+        app:layout_constraintStart_toEndOf="@+id/nombreJugador2"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/margin_small"
         />
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nombreJugador2"
+        app:layout_constraintEnd_toStartOf="@id/imagenJugador2"
+        android:layout_marginHorizontal="@dimen/margin_small"/>
+
     <Button
+        android:id="@+id/buttonFight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LUCHAR"
         app:layout_constraintTop_toBottomOf="@+id/imagenJugador2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:layout_marginVertical="@dimen/super_margin_top"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

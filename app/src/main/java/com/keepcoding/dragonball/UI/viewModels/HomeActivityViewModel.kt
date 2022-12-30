@@ -72,6 +72,13 @@ class HomeActivityViewModel : ViewModel() {
         return true
     }
 
+    fun fight() {
+        val hero1Damage = (10..60).random()
+        val hero2Damage = (10..60).random()
+        listHeroesFighting[0].currentLive -= hero2Damage
+        listHeroesFighting[1].currentLive -= hero1Damage
+    }
+
 
 
     //Funcion para mandar al hilo principal
