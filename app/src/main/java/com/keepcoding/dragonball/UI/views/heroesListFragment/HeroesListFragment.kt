@@ -47,7 +47,7 @@ class HeroesListFragment : Fragment() {
     }
 
     private fun createRecycler() {
-        binding.recyclerView.adapter = HeroesAdapter(viewModel.heroesList)
+        binding.recyclerView.adapter = HeroesAdapter(viewModel.heroesList, viewModel)
         binding.recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
     }
 

@@ -19,6 +19,7 @@ class HomeActivityViewModel : ViewModel() {
     val stateLiveDataHome: MutableLiveData<HeroesListState> by lazy { MutableLiveData<HeroesListState>() }
     var token: String = ""
     lateinit var heroesList: List<Hero>
+    var listHeroesFighting: MutableList<Hero> = arrayListOf()
 
 
     //FUNCION OBTENER LISTA HEROES DE LA API
@@ -56,8 +57,19 @@ class HomeActivityViewModel : ViewModel() {
             }
 
         })
+    }
 
 
+    //FUNCION PARA PREPARAR LUCHA ENTRE 2 USUARIOS
+    fun selectedHeroesForBattle(selectedHero:Hero): Boolean {
+        if (selectedHero.currentLive == 0) return false
+        heroesList.let {
+            val listHeroesExceptedSelectedHero = it.filter { hero -> hero != selectedHero && hero.currentLive > 0 }
+            val randomHero = listHeroesExceptedSelectedHero[(listHeroesExceptedSelectedHero.indices).random()]
+            listHeroesFighting.add(0, randomHero)
+            listHeroesFighting.add(0, selectedHero)
+        }
+        return true
     }
 
 

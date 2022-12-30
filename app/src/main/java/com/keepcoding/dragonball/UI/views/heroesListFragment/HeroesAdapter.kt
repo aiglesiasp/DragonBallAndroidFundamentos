@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -20,7 +21,7 @@ import com.keepcoding.dragonball.UI.views.battleFragment.BattleFragment
 import com.keepcoding.dragonball.databinding.HeroesItemBinding
 
 
-class HeroesAdapter(private val heroesList: List<Hero>): RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder> ()
+class HeroesAdapter(private val heroesList: List<Hero>, private val viewModel: HomeActivityViewModel?= null): RecyclerView.Adapter<HeroesAdapter.HeroesViewHolder> ()
 {
 
     //Crear viewHolder que usaremos. SIEMPRE SE HACE IGUAL
@@ -47,8 +48,8 @@ class HeroesAdapter(private val heroesList: List<Hero>): RecyclerView.Adapter<He
         fun bind(hero: Hero) {
             with(binding) {
                 nombreHeroe.text = hero.name
-                progressBar.max = hero.maxLive
-                progressBar.progress = hero.currentLive
+                progressBarLife.max = hero.maxLive
+                progressBarLife.progress = hero.currentLive
                 Glide
                     .with(root)
                     .load(hero.photo)
@@ -58,11 +59,19 @@ class HeroesAdapter(private val heroesList: List<Hero>): RecyclerView.Adapter<He
 
             }
 
+            //Navegar a la batalla
             binding.root.setOnClickListener {
-                val activity = binding.root.context as HomeActivity
-                activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.contenedor, BattleFragment())
-                    .commit()
+                Log.d("Battle Fragment", "Navigate to Battle Fragment")
+                var prepareToBattle = true
+                viewModel?.let {
+                   prepareToBattle = it.selectedHeroesForBattle(hero)
+                }
+                if(prepareToBattle) {
+                    val activity = binding.root.context as HomeActivity
+                    activity.supportFragmentManager.beginTransaction()
+                        .replace(R.id.contenedor, BattleFragment())
+                        .commit()
+                }
             }
         }
     }
