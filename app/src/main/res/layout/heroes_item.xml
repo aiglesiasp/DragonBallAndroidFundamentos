@@ -4,18 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/dark_blue"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="@color/dark_blue">
 
     <TextView
         android:id="@+id/nombreHeroe"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="NOMBRE"
+        android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imagenHeroe"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:padding="@dimen/margin_small"/>
 
     <ImageView
         android:id="@+id/imagenHeroe"
@@ -23,7 +25,11 @@
         android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreHeroe"
-        android:background="@color/teal_200"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/teal_200"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:layout_marginVertical="@dimen/margin_small"
+        />
 
     <TextView
         android:id="@+id/vidaHeroeTitulo"
@@ -31,18 +37,20 @@
         android:layout_height="wrap_content"
         android:text="VIDA ACTUAL"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/nombreHeroe"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toEndOf="@+id/imagenHeroe"
+        app:layout_constraintTop_toBottomOf="@+id/nombreHeroe"
+        android:layout_marginTop="@dimen/margin_medium"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/vidaHeroeTitulo"
-        app:layout_constraintEnd_toEndOf="@+id/vidaHeroeTitulo"
-        app:layout_constraintStart_toStartOf="@+id/vidaHeroeTitulo"
-        android:background="@color/dark_green"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imagenHeroe"
+        android:background="@color/dark_green"
+        android:layout_marginHorizontal="@dimen/margin_small"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

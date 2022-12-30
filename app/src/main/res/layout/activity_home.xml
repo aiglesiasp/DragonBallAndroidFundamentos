@@ -10,18 +10,11 @@
     <FrameLayout
         android:id="@+id/contenedor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         tools:context=".HomeActivity">
 
     </FrameLayout>
 
-    <Button
-        android:id="@+id/botonHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BOTON"
-        android:layout_margin="25dp"
-        android:layout_gravity="center"/>
 
 </LinearLayout>

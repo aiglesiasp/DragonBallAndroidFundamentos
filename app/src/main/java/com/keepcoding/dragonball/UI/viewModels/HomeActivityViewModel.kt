@@ -4,8 +4,10 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.keepcoding.dragonball.Hero
 import com.keepcoding.dragonball.LoginMainActivityViewModel
+import com.keepcoding.dragonball.UI.views.battleFragment.BattleFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*
@@ -14,14 +16,14 @@ import java.io.IOException
 
 class HomeActivityViewModel : ViewModel() {
 
-    val stateLiveData: MutableLiveData<HeroesListState> by lazy { MutableLiveData<HeroesListState>() }
+    val stateLiveDataHome: MutableLiveData<HeroesListState> by lazy { MutableLiveData<HeroesListState>() }
     var token: String = ""
-
-
+    lateinit var heroesList: List<Hero>
 
 
     //FUNCION OBTENER LISTA HEROES DE LA API
     fun getHeroesList() {
+        if(token.isBlank()) return
         setValueOnMainThread(HeroesListState.Loading)
         val client = OkHttpClient()
         val url = "https://dragonball.keepcoding.education/api/heros/all"
@@ -45,7 +47,12 @@ class HomeActivityViewModel : ViewModel() {
             override fun onResponse(call: Call, response: Response) {
                 Log.d(HomeActivityViewModel::javaClass.name, "Success")
                 val responseBody = response.body?.string()
-                println(responseBody)
+                val responseHeroes: Array<Hero> = Gson().fromJson(responseBody, Array<Hero>::class.java)
+                val mapHeroes: List<Hero> = responseHeroes.map {
+                    Hero(it.id, it.name, it.photo)
+                }
+                setValueOnMainThread(HeroesListState.Success(mapHeroes))
+                heroesList = mapHeroes
             }
 
         })
@@ -58,7 +65,7 @@ class HomeActivityViewModel : ViewModel() {
     //Funcion para mandar al hilo principal
     fun setValueOnMainThread(value: HomeActivityViewModel.HeroesListState) {
         viewModelScope.launch(Dispatchers.Main) {
-            stateLiveData.value = value
+            stateLiveDataHome.value = value
         }
     }
     //CONTROL DE ESTADOS

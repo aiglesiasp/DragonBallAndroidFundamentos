@@ -33,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Obtener el token que me pasan del otro activity
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             //OBTENER TOKEN
             intent.getStringExtra(TAG_TOKEN)?.let {
                 viewModel.token = it
@@ -45,24 +45,9 @@ class HomeActivity : AppCompatActivity() {
                 .commitNow()
         }
 
+
         //ESCUCHAS DE BOTON
-        setListeners()
 
         //OBSERVADORES
-
-
-    }
-
-    //ESCUCHADORES
-    private fun setListeners() {
-        with(binding) {
-            botonHome.setOnClickListener {
-                //NAVEGAR AL FRAGMENT
-                val fragment = BattleFragment()
-                supportFragmentManager.beginTransaction()
-                    .replace(binding.contenedor.id, fragment)
-                    .commitNow()
-            }
-        }
     }
 }

@@ -68,4 +68,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:4.10.0'
+
+    //Para la imagen
+    implementation ("com.github.bumptech.glide:glide:4.14.2@aar") {
+        transitive = true
+    }
 }
