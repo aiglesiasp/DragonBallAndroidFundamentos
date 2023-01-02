@@ -68,6 +68,7 @@ class BattleFragment : Fragment() {
             .centerCrop()
             .placeholder(R.drawable.background_heroes_image)
             .into(binding.imagenJugador2)
+        reloadLifeProgressBar()
     }
 
     private fun returnToHeroesList() {
