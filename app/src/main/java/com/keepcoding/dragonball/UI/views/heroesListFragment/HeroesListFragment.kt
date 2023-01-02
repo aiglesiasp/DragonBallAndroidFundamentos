@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.keepcoding.dragonball.HomeActivity
 import com.keepcoding.dragonball.UI.viewModels.HomeActivityViewModel
 import com.keepcoding.dragonball.databinding.FragmentHeroesListBinding
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +20,7 @@ class HeroesListFragment : Fragment() {
     private lateinit var binding: FragmentHeroesListBinding
 
 
+    //LLAMO A LOS HEROES CUANDO CREO FRAGMENT
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getHeroesList()
@@ -40,12 +38,8 @@ class HeroesListFragment : Fragment() {
         }
     }
 
-    //AQUI IRA EL MAXIMO DE CODIGO
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //TODO: Desarrollar codigo
-    }
 
+    // CREADOR DEL RECYCLER
     private fun createRecycler() {
         binding.recyclerView.adapter = HeroesAdapter(viewModel.heroesList, viewModel)
         binding.recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
@@ -53,28 +47,26 @@ class HeroesListFragment : Fragment() {
 
     //OBSERVADORES
     private fun setObservers() {
-        viewModel.stateLiveDataHome.observe(viewLifecycleOwner) {
+        viewModel.stateLiveDataHeroes.observe(viewLifecycleOwner) {
             when (it) {
                 is HomeActivityViewModel.HeroesListState.Success -> {
-                    Toast.makeText(binding.root.context, "HEROES CARGADOS", Toast.LENGTH_LONG).show()
+                    binding.progressBarHeroes?.visibility = View.INVISIBLE
                     lifecycleScope.launch(Dispatchers.Main) {
                         createRecycler()
                     }
                 }
 
                 is HomeActivityViewModel.HeroesListState.Error -> {
+                    binding.progressBarHeroes?.visibility = View.INVISIBLE
                     Toast.makeText(binding.root.context, "Error al cargar: ${it.error}", Toast.LENGTH_LONG).show()
                 }
 
                 is HomeActivityViewModel.HeroesListState.Loading -> {
-                    Toast.makeText(binding.root.context, "CARGANDO...", Toast.LENGTH_LONG).show()
+                    binding.progressBarHeroes?.visibility = View.VISIBLE
                 }
                 else -> {
                     Toast.makeText(
-                        binding.root.context,
-                        "NO HA ENTRADO EN NINGUNA DE LAS OPCIONES",
-                        Toast.LENGTH_LONG
-                    ).show()
+                        binding.root.context,"NO HA ENTRADO EN NINGUNA DE LAS OPCIONES", Toast.LENGTH_LONG).show()
                 }
             }
         }

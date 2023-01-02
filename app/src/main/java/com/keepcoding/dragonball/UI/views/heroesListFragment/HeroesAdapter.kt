@@ -62,13 +62,14 @@ class HeroesAdapter(private val heroesList: List<Hero>, private val viewModel: H
             //Navegar a la batalla
             binding.root.setOnClickListener {
                 Log.d("Battle Fragment", "Navigate to Battle Fragment")
-                var prepareToBattle = true
+                var prepareToBattle = false
                 viewModel?.let {
-                   prepareToBattle = it.selectedHeroesForBattle(hero)
+                    prepareToBattle = it.selectedHeroesForBattle(hero)
                 }
                 if(prepareToBattle) {
                     val activity = binding.root.context as HomeActivity
                     activity.supportFragmentManager.beginTransaction()
+                        .addToBackStack("battle")
                         .replace(R.id.contenedor, BattleFragment())
                         .commit()
                 }

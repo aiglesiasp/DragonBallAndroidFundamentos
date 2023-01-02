@@ -5,15 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.keepcoding.dragonball.HomeActivity
 import com.keepcoding.dragonball.R
 import com.keepcoding.dragonball.UI.viewModels.HomeActivityViewModel
-import com.keepcoding.dragonball.UI.views.heroesListFragment.HeroesListFragment
 import com.keepcoding.dragonball.databinding.FragmentBattleBinding
-import com.keepcoding.dragonball.databinding.FragmentHeroesListBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class BattleFragment : Fragment() {
 
@@ -31,14 +32,25 @@ class BattleFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentBattleBinding.inflate(inflater)
+        //PREPARO VIEW CON LOS HEROES
+        prepareToBattle()
+        setObservers()
+        return binding.root
+    }
 
-        //CREO FUNCION ESCUCHA BOTON PARA LA LUCHA
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         //BOTON DE LUCHAR
         binding.buttonFight.setOnClickListener {
-            viewModel.fight()
+            val fightFinished = viewModel.fight()
             reloadLifeProgressBar()
+            if(fightFinished) returnToHeroesList()
         }
+    }
 
+
+    //FUNCION PARA PINTAR HEROES EN EL FRAGMENT
+    private fun prepareToBattle() {
         //OBTENER HEROES
         val hero1 = viewModel.listHeroesFighting[0]
         val hero2 = viewModel.listHeroesFighting[1]
@@ -57,17 +69,9 @@ class BattleFragment : Fragment() {
             .centerCrop()
             .placeholder(R.drawable.background_heroes_image)
             .into(binding.imagenJugador2)
-
-        return binding.root
     }
 
-    //AQUI IRA EL MAXIMO DE CODIGO
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //TODO: Desarrollar codigo
-    }
-
-    private fun returnToPreviousFragment() {
+    private fun returnToHeroesList() {
         val activity = activity as HomeActivity
         activity.supportFragmentManager
             .popBackStack()
@@ -76,5 +80,25 @@ class BattleFragment : Fragment() {
     private fun reloadLifeProgressBar() {
         binding.progressBar1.progress = viewModel.listHeroesFighting[0].currentLive
         binding.progressBar2.progress = viewModel.listHeroesFighting[1].currentLive
+    }
+
+    //OBSERVADORES
+    private fun setObservers() {
+        viewModel.stateLiveDataWinners.observe(viewLifecycleOwner) {
+            when (it) {
+                is HomeActivityViewModel.WinnerListState.SuccessWinner -> {
+                    Toast.makeText(binding.root.context, "EL CAMPEON MUNDIAL DEL TORNEO ES: ${it.heroe.name}", Toast.LENGTH_LONG).show()
+                }
+
+                is HomeActivityViewModel.WinnerListState.EmptyWinner -> {
+                    Toast.makeText(binding.root.context, "TODOS MUERTOS. EL JUEGO HA TERMINADO", Toast.LENGTH_LONG).show()
+                }
+
+                else -> {
+                    Toast.makeText(
+                        binding.root.context,"NO HA ENTRADO EN NINGUNA DE LAS OPCIONES", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 }
