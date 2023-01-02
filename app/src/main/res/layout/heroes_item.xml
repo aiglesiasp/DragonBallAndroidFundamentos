@@ -49,8 +49,10 @@
         app:layout_constraintTop_toBottomOf="@+id/vidaHeroeTitulo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imagenHeroe"
-        android:background="@color/blue_semitransparent"
-        android:layout_marginHorizontal="@dimen/margin_small"/>
+        android:progressBackgroundTint="@color/blue_semitransparent"
+        android:progressBackgroundTintMode="screen"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:foregroundGravity="center"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

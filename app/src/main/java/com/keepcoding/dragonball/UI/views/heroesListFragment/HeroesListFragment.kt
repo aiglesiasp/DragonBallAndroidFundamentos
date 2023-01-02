@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.keepcoding.dragonball.UI.viewModels.HomeActivityViewModel
 import com.keepcoding.dragonball.databinding.FragmentHeroesListBinding
 import kotlinx.coroutines.Dispatchers
@@ -50,19 +51,19 @@ class HeroesListFragment : Fragment() {
         viewModel.stateLiveDataHeroes.observe(viewLifecycleOwner) {
             when (it) {
                 is HomeActivityViewModel.HeroesListState.Success -> {
-                    binding.progressBarHeroes?.visibility = View.INVISIBLE
+                    binding.progressBarHeroes.visibility = View.INVISIBLE
                     lifecycleScope.launch(Dispatchers.Main) {
                         createRecycler()
                     }
                 }
 
                 is HomeActivityViewModel.HeroesListState.Error -> {
-                    binding.progressBarHeroes?.visibility = View.INVISIBLE
+                    binding.progressBarHeroes.visibility = View.INVISIBLE
                     Toast.makeText(binding.root.context, "Error al cargar: ${it.error}", Toast.LENGTH_LONG).show()
                 }
 
                 is HomeActivityViewModel.HeroesListState.Loading -> {
-                    binding.progressBarHeroes?.visibility = View.VISIBLE
+                    binding.progressBarHeroes.visibility = View.VISIBLE
                 }
                 else -> {
                     Toast.makeText(

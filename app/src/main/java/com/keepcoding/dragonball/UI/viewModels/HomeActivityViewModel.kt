@@ -1,11 +1,13 @@
 package com.keepcoding.dragonball.UI.viewModels
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.keepcoding.dragonball.Hero
+import com.keepcoding.dragonball.HomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*
@@ -14,7 +16,6 @@ import java.io.IOException
 class HomeActivityViewModel : ViewModel() {
 
     val stateLiveDataHeroes: MutableLiveData<HeroesListState> by lazy { MutableLiveData<HeroesListState>() }
-    val stateLiveDataWinners: MutableLiveData<WinnerListState> by lazy { MutableLiveData<WinnerListState>() }
     var token: String = ""
     lateinit var heroesList: List<Hero>
     var listHeroesFighting: MutableList<Hero> = arrayListOf()
@@ -62,13 +63,14 @@ class HomeActivityViewModel : ViewModel() {
     fun selectedHeroesForBattle(selectedHero:Hero): Boolean {
         if (selectedHero.currentLive == 0) return false
         val hero = obtenerGanador()
-        if (hero != null) {
-            if(hero.id.isEmpty()) {
-                setValueOnMainThread(WinnerListState.EmptyWinner(hero))
+        if (hero!=null)
+        {
+            if(hero.name.isBlank()) {
+                Toast.makeText(HomeActivity(), "EL JUEGO SE HA TERMINADO", Toast.LENGTH_LONG).show()
                 return false
             }
-            if(hero.id.isNotEmpty()) {
-                setValueOnMainThread(WinnerListState.SuccessWinner(hero))
+            if(hero.name.isNotBlank()) {
+                Toast.makeText(HomeActivity(), "EL GANADOR DEL TORNEO ES: ${hero.name}", Toast.LENGTH_LONG).show()
                 return false
             }
             return false
@@ -115,15 +117,6 @@ class HomeActivityViewModel : ViewModel() {
         return null
     }
 
-
-    //Funcion para mandar al hilo principal
-    fun setValueOnMainThread(value: HomeActivityViewModel.WinnerListState) {
-        viewModelScope.launch(Dispatchers.Main) {
-            stateLiveDataWinners.value = value
-        }
-    }
-
-
     //Funcion para mandar al hilo principal
     fun setValueOnMainThread(value: HomeActivityViewModel.HeroesListState) {
         viewModelScope.launch(Dispatchers.Main) {
@@ -135,11 +128,5 @@ class HomeActivityViewModel : ViewModel() {
         data class Success(val heroes: List<Hero>) : HeroesListState()
         data class Error(val error: String) : HeroesListState()
         object Loading: HeroesListState()
-    }
-
-    //CONTROL DE ESTADOS
-    sealed class WinnerListState {
-        data class SuccessWinner(val heroe: Hero) : WinnerListState()
-        data class EmptyWinner(val heroe: Hero) : WinnerListState()
     }
 }

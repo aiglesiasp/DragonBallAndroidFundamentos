@@ -34,7 +34,6 @@ class BattleFragment : Fragment() {
         binding = FragmentBattleBinding.inflate(inflater)
         //PREPARO VIEW CON LOS HEROES
         prepareToBattle()
-        setObservers()
         return binding.root
     }
 
@@ -82,23 +81,4 @@ class BattleFragment : Fragment() {
         binding.progressBar2.progress = viewModel.listHeroesFighting[1].currentLive
     }
 
-    //OBSERVADORES
-    private fun setObservers() {
-        viewModel.stateLiveDataWinners.observe(viewLifecycleOwner) {
-            when (it) {
-                is HomeActivityViewModel.WinnerListState.SuccessWinner -> {
-                    Toast.makeText(binding.root.context, "EL CAMPEON MUNDIAL DEL TORNEO ES: ${it.heroe.name}", Toast.LENGTH_LONG).show()
-                }
-
-                is HomeActivityViewModel.WinnerListState.EmptyWinner -> {
-                    Toast.makeText(binding.root.context, "TODOS MUERTOS. EL JUEGO HA TERMINADO", Toast.LENGTH_LONG).show()
-                }
-
-                else -> {
-                    Toast.makeText(
-                        binding.root.context,"NO HA ENTRADO EN NINGUNA DE LAS OPCIONES", Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-    }
 }
