@@ -1,22 +1,17 @@
 package com.keepcoding.dragonball.UI.views.battleFragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.keepcoding.dragonball.HomeActivity
 import com.keepcoding.dragonball.R
 import com.keepcoding.dragonball.UI.viewModels.HomeActivityViewModel
 import com.keepcoding.dragonball.databinding.FragmentBattleBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class BattleFragment : Fragment() {
+class BattleFragment : androidx.fragment.app.Fragment() {
 
     private val viewModel: HomeActivityViewModel by activityViewModels()
     private lateinit var binding: FragmentBattleBinding
