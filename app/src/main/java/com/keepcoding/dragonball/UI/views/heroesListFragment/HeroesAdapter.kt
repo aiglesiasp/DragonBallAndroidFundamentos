@@ -39,7 +39,6 @@ class HeroesAdapter(private val heroesList: List<Hero>, private val viewModel: H
     //NUMERO DE ELEMENTOS QUE CONTENDRA LA LISTA
     override fun getItemCount(): Int {
         return heroesList.size
-        //TODO: pasar elementos a imprimir
     }
 
 

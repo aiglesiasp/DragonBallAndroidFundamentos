@@ -44,10 +44,5 @@ class HomeActivity : AppCompatActivity() {
                 .replace(binding.contenedor.id, fragment)
                 .commitNow()
         }
-
-
-        //ESCUCHAS DE BOTON
-
-        //OBSERVADORES
     }
 }

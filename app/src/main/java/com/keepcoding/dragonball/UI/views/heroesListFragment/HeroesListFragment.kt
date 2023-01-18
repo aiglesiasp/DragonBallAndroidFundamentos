@@ -59,7 +59,7 @@ class HeroesListFragment : Fragment() {
 
                 is HomeActivityViewModel.HeroesListState.Error -> {
                     binding.progressBarHeroes.visibility = View.INVISIBLE
-                    Toast.makeText(binding.root.context, "Error al cargar: ${it.error}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(binding.root.context, "Error al cargar: ${it.error}", Toast.LENGTH_SHORT).show()
                 }
 
                 is HomeActivityViewModel.HeroesListState.Loading -> {
@@ -67,8 +67,20 @@ class HeroesListFragment : Fragment() {
                 }
                 else -> {
                     Toast.makeText(
-                        binding.root.context,"NO HA ENTRADO EN NINGUNA DE LAS OPCIONES", Toast.LENGTH_LONG).show()
+                        binding.root.context,"NO HA ENTRADO EN NINGUNA DE LAS OPCIONES", Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+
+        viewModel.stateFightData.observe(viewLifecycleOwner) {
+            when(it) {
+                is HomeActivityViewModel.FightListState.Success -> {
+                    Toast.makeText(binding.root.context, "EL GANADOR ES:  ${it.heroe.name}", Toast.LENGTH_LONG).show()
+                }
+                is HomeActivityViewModel.FightListState.Error -> {
+                    Toast.makeText(binding.root.context, "LO SENTIMOS,  ${it.error}", Toast.LENGTH_LONG).show()
+                }
+
             }
         }
     }

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.keepcoding.dragonball.Hero
 import com.keepcoding.dragonball.HomeActivity
+import com.keepcoding.dragonball.UI.views.heroesListFragment.HeroesListFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*
@@ -15,6 +16,7 @@ import java.io.IOException
 
 class HomeActivityViewModel : ViewModel() {
 
+    val stateFightData: MutableLiveData<FightListState> by lazy { MutableLiveData<FightListState>() }
     val stateLiveDataHeroes: MutableLiveData<HeroesListState> by lazy { MutableLiveData<HeroesListState>() }
     var token: String = ""
     lateinit var heroesList: List<Hero>
@@ -24,7 +26,7 @@ class HomeActivityViewModel : ViewModel() {
     //FUNCION OBTENER LISTA HEROES DE LA API
     fun getHeroesList() {
         if(token.isBlank()) return
-        setValueOnMainThread(HeroesListState.Loading)
+        setValueOnMainThreadHeroesListState(HeroesListState.Loading)
         val client = OkHttpClient()
         val url = "https://dragonball.keepcoding.education/api/heros/all"
         val body = FormBody.Builder()
@@ -41,7 +43,7 @@ class HomeActivityViewModel : ViewModel() {
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e(HomeActivityViewModel::javaClass.name, "Error")
-                setValueOnMainThread(HeroesListState.Error(e.message.toString()))
+                setValueOnMainThreadHeroesListState(HeroesListState.Error(e.message.toString()))
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -51,7 +53,7 @@ class HomeActivityViewModel : ViewModel() {
                 val mapHeroes: List<Hero> = responseHeroes.map {
                     Hero(it.id, it.name, it.photo)
                 }
-                setValueOnMainThread(HeroesListState.Success(mapHeroes))
+                setValueOnMainThreadHeroesListState(HeroesListState.Success(mapHeroes))
                 heroesList = mapHeroes
             }
 
@@ -61,16 +63,18 @@ class HomeActivityViewModel : ViewModel() {
 
     //FUNCION PARA PREPARAR LUCHA ENTRE 2 USUARIOS
     fun selectedHeroesForBattle(selectedHero:Hero): Boolean {
-        if (selectedHero.currentLive == 0) return false
+        if (selectedHero.currentLive == 0) {
+            return false
+        }
         val hero = obtenerGanador()
         if (hero!=null)
         {
             if(hero.name.isBlank()) {
-                Toast.makeText(HomeActivity(), "EL JUEGO SE HA TERMINADO", Toast.LENGTH_LONG).show()
+                setValueOnMainThreadFightListState(FightListState.Error("EL JUEGO HA TERMINADO"))
                 return false
             }
             if(hero.name.isNotBlank()) {
-                Toast.makeText(HomeActivity(), "EL GANADOR DEL TORNEO ES: ${hero.name}", Toast.LENGTH_LONG).show()
+                setValueOnMainThreadFightListState(FightListState.Success(hero))
                 return false
             }
             return false
@@ -117,16 +121,28 @@ class HomeActivityViewModel : ViewModel() {
         return null
     }
 
-    //Funcion para mandar al hilo principal
-    fun setValueOnMainThread(value: HomeActivityViewModel.HeroesListState) {
-        viewModelScope.launch(Dispatchers.Main) {
-            stateLiveDataHeroes.value = value
-        }
-    }
     //CONTROL DE ESTADOS
     sealed class HeroesListState {
         data class Success(val heroes: List<Hero>) : HeroesListState()
         data class Error(val error: String) : HeroesListState()
         object Loading: HeroesListState()
+    }
+    //Funcion para mandar al hilo principal
+    fun setValueOnMainThreadHeroesListState(value: HomeActivityViewModel.HeroesListState) {
+        viewModelScope.launch(Dispatchers.Main) {
+            stateLiveDataHeroes.value = value
+        }
+    }
+
+    //CONTROL DE ESTADOS
+    sealed class FightListState {
+        data class Success(val heroe: Hero) : FightListState()
+        data class Error(val error: String) : FightListState()
+    }
+    //Funcion para mandar al hilo principal
+    fun setValueOnMainThreadFightListState(value: HomeActivityViewModel.FightListState) {
+        viewModelScope.launch(Dispatchers.Main) {
+            stateFightData.value = value
+        }
     }
 }
